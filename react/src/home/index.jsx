@@ -67,7 +67,7 @@ function Home() {
 </section>
 <section className="py-8 bg-white z-50 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-12">
 <h2 className="font-bold text-3xl">How it Works?</h2>
-<h2 className="text-md text-gray-500">Give mock interview in just 3 simplar easy step</h2>
+<h2 className="text-md text-gray-500">Create your resume in just 3 simplar easy step</h2>
 
 <div className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
       <a
@@ -78,11 +78,10 @@ function Home() {
       >
        <AtomIcon className='h-8 w-8'/>
 
-        <h2 className="mt-4 text-xl font-bold text-black">Write promot for your form</h2>
+        <h2 className="mt-4 text-xl font-bold text-black">Craft Your Resume</h2>
 
         <p className="mt-1 text-sm text-gray-600">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex ut quo possimus adipisci
-          distinctio alias voluptatum blanditiis laudantium.
+        "Begin your journey by providing key details about your career and skills. Our AI will help you craft a professional resume tailored to your aspirations."
         </p>
       </a>
 
@@ -92,11 +91,10 @@ function Home() {
       >
       <Edit className='h-8 w-8'/>
 
-        <h2 className="mt-4 text-xl font-bold text-black">Edit Your form </h2>
+        <h2 className="mt-4 text-xl font-bold text-black">Personalize Your Profile </h2>
 
         <p className="mt-1 text-sm text-gray-600">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex ut quo possimus adipisci
-          distinctio alias voluptatum blanditiis laudantium.
+        "Fine-tune your resume to highlight your strengths. Customize sections, adjust formatting, and ensure your resume reflects your unique professional story."
         </p>
       </a>
 
@@ -106,25 +104,24 @@ function Home() {
       >
       <Share2 className='h-8 w-8' />
 
-        <h2 className="mt-4 text-xl font-bold text-black">Share & Start Accepting Responses</h2>
+        <h2 className="mt-4 text-xl font-bold text-black">Share & Explore Opportunities</h2>
 
         <p className="mt-1 text-sm text-gray-600">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex ut quo possimus adipisci
-          distinctio alias voluptatum blanditiis laudantium.
+        "Seamlessly share your resume with potential employers or upload it to job platforms. Discover new opportunities and take the next step in your career."
         </p>
       </a>
 
     
     </div>
 
-    <div className="mt-12 text-center">
+    {/* <div className="mt-12 text-center">
       <a
         href="/sign-in"
         className="inline-block rounded bg-pink-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-pink-700 focus:outline-none focus:ring focus:ring-yellow-400"
       >
         Get Started Today
       </a>
-    </div>
+    </div> */}
     </section>
   </div>
  

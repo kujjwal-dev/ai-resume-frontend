@@ -1,31 +1,31 @@
-import { Button } from '@/components/ui/button'
-import { Textarea } from '@/components/ui/textarea'
-import { ResumeInfoContext } from '@/context/ResumeInfoContext'
-import React, { useContext, useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Button } from '@/components/ui/button';
+import { Textarea } from '@/components/ui/textarea';
+import { ResumeInfoContext } from '@/context/ResumeInfoContext';
+import React, { useContext, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import GlobalApi from '../../../../../service/GlobalApi';
 import { toast } from 'sonner';
 import { Brain, LoaderCircle } from 'lucide-react';
-import { AIChatSession } from '../../../../../service/AIModal'
+import { AIChatSession } from '../../../../../service/AIModal';
 
-// Define the prompt with placeholders
-const prompt = 'Job Title: {jobTitle}. Provide a summary for my resume within 4-5 lines in JSON format. Each experience level (Fresher, Mid-Level, Experienced) should be a separate JSON object with the fields "experience_level" and "summary". The output should be a JSON array containing these objects with placeholders for specific details like [insert specific game genre/platform], [insert number] years, and so on.'
+const prompt = 'Job Title: {jobTitle}. Provide a summary for my resume within 4-5 lines in JSON format. Each experience level (Fresher, Mid-Level, Experienced) should be a separate JSON object with the fields "experience_level" and "summary". The output should be a JSON array containing these objects with placeholders for specific details like [insert specific game genre/platform], [insert number] years, and so on.';
 
 const Summary = ({ enabledNext }) => {
   const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext);
-  const [summery, setSummery] = useState('');
+  const [summery, setSummery] = useState(resumeInfo.summery || '');
   const [loading, setLoading] = useState(false);
   const params = useParams();
   const [aiGeneratedSummeryList, setAiGeneratedSummeryList] = useState([]);
 
+  // Update resumeInfo when summery changes, but only if it's different
   useEffect(() => {
     if (summery !== resumeInfo.summery) {
-      setResumeInfo({
-        ...resumeInfo,
-        summery: summery
-      });
+      setResumeInfo((prevInfo) => ({
+        ...prevInfo,
+        summery: summery,
+      }));
     }
-  }, [summery, resumeInfo, setResumeInfo]);
+  }, [summery, resumeInfo.summery, setResumeInfo]);
 
   const GenerateSummeryFromAI = async () => {
     if (!resumeInfo?.jobTitle) {
@@ -41,7 +41,7 @@ const Summary = ({ enabledNext }) => {
     try {
       const result = await AIChatSession.sendMessage(PROMPT);
       console.log("result", result);
-      const parsedResult = JSON.parse(result.response.text());
+      const parsedResult = JSON.parse(await result.response.text());
       console.log(parsedResult);
       setAiGeneratedSummeryList(parsedResult);
 
@@ -58,9 +58,9 @@ const Summary = ({ enabledNext }) => {
     setLoading(true);
     const data = {
       data: {
-        summery: summery
-      }
-    }
+        summery: summery,
+      },
+    };
     GlobalApi.UpdateResumeDetail(params?.resumeId, data).then((response) => {
       console.log(response);
       enabledNext(true);
@@ -69,7 +69,7 @@ const Summary = ({ enabledNext }) => {
     }, (error) => {
       setLoading(false);
     });
-  }
+  };
 
   const handleSummaryClick = (summary) => {
     setSummery(summary);
@@ -113,7 +113,7 @@ const Summary = ({ enabledNext }) => {
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
 export default Summary;
